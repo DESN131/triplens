@@ -1,11 +1,4 @@
-# Override to use another registry/mirror, e.g.
-#   docker build --build-arg PYTHON_IMAGE=registry.example.com/library/python:3.12-slim .
-ARG PYTHON_IMAGE=python:3.12-slim
-FROM ${PYTHON_IMAGE}
-
-# Override when a PyPI mirror is faster on your network, e.g.
-#   docker build --build-arg PIP_INDEX=https://pypi.tuna.tsinghua.edu.cn/simple .
-ARG PIP_INDEX=https://pypi.org/simple
+FROM python:3.12-slim
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -17,7 +10,7 @@ WORKDIR /app
 
 # dependencies first, so editing the app does not invalidate the pip layer
 COPY requirements.txt ./
-RUN pip install --no-cache-dir --index-url "${PIP_INDEX}" -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app ./app
 COPY run.py ./

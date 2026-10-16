@@ -61,8 +61,6 @@ docker run -d -p 8090:8090 -v triplens-cache:/data triplens
 ```
 
 镜像以非 root 用户运行，时刻表缓存放在 `/data` 卷里，自带 `/api/meta` 健康检查。
-如果拉取镜像或 PyPI 较慢/被墙，可在构建时换源：
-`docker build --build-arg PYTHON_IMAGE=… --build-arg PIP_INDEX=… .`
 
 ## 配置
 

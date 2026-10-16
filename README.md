@@ -62,8 +62,7 @@ docker run -d -p 8090:8090 -v triplens-cache:/data triplens
 ```
 
 The image runs as a non-root user, keeps its timetable cache in the `/data` volume and
-ships a health check on `/api/meta`. Behind a slow or blocked registry/PyPI, override the
-base image or the index: `docker build --build-arg PYTHON_IMAGE=… --build-arg PIP_INDEX=… .`
+ships a health check on `/api/meta`.
 
 ## Configuration
 

@@ -11,6 +11,9 @@ services:
       # TRIPLENS_CACHE: /data
     volumes:
       - triplens-cache:/data
+      # If the container has no outbound access (e.g. a host VPN that only
+      # captures the host's own traffic), seed the cache from the host instead:
+      #   - ./.tdb-cache:/data
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "python", "-c",
