@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TripLens · Sydney transit</title>
+<link rel="stylesheet" href="/static/style.css?v=10">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🚉</text></svg>">
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="#/">
+    <span class="logo">TL</span>
+    <span>
+      <b>TripLens</b>
+      <i id="tagline" data-i18n="tagline">Sydney transit · live + full timetables</i>
+    </span>
+  </a>
+
+  <div class="searchbox" id="searchbox">
+    <input id="q" type="search" placeholder="搜索车站或线路（按 / 聚焦，↑↓ 选择，Enter 打开）"
+           autocomplete="off" spellcheck="false" aria-label="搜索车站或线路">
+    <kbd>/</kbd>
+    <div class="results" id="results" role="listbox"></div>
+  </div>
+
+  <div class="status">
+    <span class="clock" id="clock">--:--</span>
+    <span class="dot" id="dot" title="实时接口状态"></span>
+    <span class="cd" id="cd">—</span>
+    <button class="icon" id="refresh" title="立即刷新">↻</button>
+    <div class="lang" id="lang" role="group" aria-label="Language">
+      <button data-lang="en">EN</button><button data-lang="zh">中文</button>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" id="nav">
+  <a href="#/station" data-tab="station" data-i18n="nav_station">Stations</a>
+  <a href="#/line" data-tab="line" data-i18n="nav_line">Line timetables</a>
+  <a href="#/alerts" data-tab="alerts" data-i18n="nav_alerts">Service notices</a>
+</nav>
+
+<main id="view" aria-live="polite">
+  <div class="splash"><div class="spin"></div>Loading timetables…</div>
+</main>
+
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div>
+      <h3 id="drawerTitle">—</h3>
+      <p id="drawerSub" class="muted"></p>
+    </div>
+    <button class="icon" id="drawerClose" title="Close (Esc)">✕</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+</aside>
+<div class="scrim" id="scrim"></div>
+
+<footer>
+  <span id="buildinfo" class="muted"></span>
+</footer>
+
+<script src="/static/app.js?v=10"></script>
+</body>
+</html>

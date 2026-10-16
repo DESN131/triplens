@@ -1,0 +1,50 @@
+# --- Python -----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.egg-info/
+*.egg
+
+# virtual environments
+.venv/
+venv/
+env/
+.python-version
+
+# packaging / build artefacts
+build/
+dist/
+*.spec
+pip-wheel-metadata/
+
+# --- application data -------------------------------------------------------
+# downloaded timetable files (large, re-fetched automatically)
+.tdb-cache/
+*.tdb
+*.tdb.tmp
+
+# runtime logs and temporary files
+*.log
+*.tmp
+*.out
+*.err
+
+# --- tooling ----------------------------------------------------------------
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.playwright-cli/
+
+# --- editors / OS -----------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
