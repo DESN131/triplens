@@ -1,8 +1,8 @@
+<h1 align="center">TripLens</h1>
+
 <p align="center">
   <a href="../README.md">English</a> · <b>中文</b>
 </p>
-
-<h1 align="center">TripLens</h1>
 
 <p align="center">
   <b>一个本地运行的悉尼交通查询工具</b><br>
@@ -50,6 +50,19 @@ python run.py --port 9000 --open --reload
 
 首次启动会下载并解析时刻表文件（约 3 秒），缓存在 `.tdb-cache/`；之后完全依赖本地缓存，
 离线也能用。
+
+### Docker
+
+```bash
+docker compose up -d            # 打开 http://localhost:8090
+# 或者不用 compose：
+docker build -t triplens .
+docker run -d -p 8090:8090 -v triplens-cache:/data triplens
+```
+
+镜像以非 root 用户运行，时刻表缓存放在 `/data` 卷里，自带 `/api/meta` 健康检查。
+如果拉取镜像或 PyPI 较慢/被墙，可在构建时换源：
+`docker build --build-arg PYTHON_IMAGE=… --build-arg PIP_INDEX=… .`
 
 ## 配置
 

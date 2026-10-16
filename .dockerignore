@@ -1,0 +1,35 @@
+# version control and tooling
+.git
+.gitignore
+.dockerignore
+.playwright-cli/
+.vscode/
+.idea/
+
+# local state and caches
+.tdb-cache/
+**/__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.log
+*.tmp
+*.out
+*.err
+
+# documentation and screenshots
+docs/
+README.md
+README.zh-CN.md
+*.png
+!app/static/**/*.png
+
+# editors / OS
+*.swp
+*~
+.DS_Store
+Thumbs.db

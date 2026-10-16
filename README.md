@@ -1,8 +1,8 @@
+<h1 align="center">TripLens</h1>
+
 <p align="center">
   <b>English</b> · <a href="docs/README.zh-CN.md">中文</a>
 </p>
-
-<h1 align="center">TripLens</h1>
 
 <p align="center">
   <b>A fast, local web app for querying Sydney public transport</b><br>
@@ -51,6 +51,19 @@ python run.py --port 9000 --open --reload
 
 The first start downloads and parses the timetable files (about three seconds) into
 `.tdb-cache/`; afterwards the app runs from that local cache, even offline.
+
+### Docker
+
+```bash
+docker compose up -d            # http://localhost:8090
+# or, without compose:
+docker build -t triplens .
+docker run -d -p 8090:8090 -v triplens-cache:/data triplens
+```
+
+The image runs as a non-root user, keeps its timetable cache in the `/data` volume and
+ships a health check on `/api/meta`. Behind a slow or blocked registry/PyPI, override the
+base image or the index: `docker build --build-arg PYTHON_IMAGE=… --build-arg PIP_INDEX=… .`
 
 ## Configuration
 
