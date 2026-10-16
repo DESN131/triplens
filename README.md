@@ -1,25 +1,39 @@
-# TripLens
+<p align="center">
+  <b>English</b> · <a href="docs/README.zh-CN.md">中文</a>
+</p>
 
-**A fast, local web app for querying Sydney public transport** — live network status,
-per-station departure boards and complete line timetables in one keyboard-friendly page.
+<h1 align="center">TripLens</h1>
 
-![Home](preview-home.png)
+<p align="center">
+  <b>A fast, local web app for querying Sydney public transport</b><br>
+  live network status · per-station departure boards · complete line timetables
+</p>
 
-*[中文说明](README.zh-CN.md) · English*
+<p align="center">
+  <img src="docs/preview-home.png" alt="Home dashboard" width="900">
+</p>
+
+---
 
 ## Features
 
 * **Station boards** — every scheduled departure for any station and date, with live
   amendments merged in: retimed services show the live time plus the delay, platform
   changes are flagged. Filter by mode, hide departed services, page through busy hubs.
-  ![Station board](preview-station.png)
+
+  <img src="docs/preview-station.png" alt="Station board" width="820">
+
 * **Line timetables** — pick a line, direction and period; the table opens on "now" and
   pages 20/40/80/all so long lines still fit one screen.
-  ![Line timetable](preview-line.png)
+
+  <img src="docs/preview-line.png" alt="Line timetable" width="820">
+
 * **Home dashboard** — trips per hour by mode, per-mode totals, popular lines with
   first/last/peak frequency, and popular stations with their next departures.
 * **Service notices** — disruptions, trackwork and news, filterable by mode/line/keyword.
-  ![Service notices](preview-alerts.png)
+
+  <img src="docs/preview-alerts.png" alt="Service notices" width="820">
+
 * **Trip detail** — click any departure for the full stop-by-stop timetable.
 * **English & Chinese UI**, auto-detected from the browser and switchable in the header.
 * **Keyboard first** — `/` search, `↑ ↓` pick, `Enter` open, `Esc` close.

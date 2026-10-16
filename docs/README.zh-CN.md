@@ -1,24 +1,38 @@
-# TripLens
+<p align="center">
+  <a href="../README.md">English</a> · <b>中文</b>
+</p>
 
-**一个本地运行的悉尼交通查询工具**：实时班次、站点发车看板、完整线路时刻表，都在一个
-键盘优先的页面里。
+<h1 align="center">TripLens</h1>
 
-![主页](preview-zh-home.png)
+<p align="center">
+  <b>一个本地运行的悉尼交通查询工具</b><br>
+  实时班次 · 站点发车看板 · 完整线路时刻表
+</p>
 
-*中文 · [English](README.md)*
+<p align="center">
+  <img src="preview-zh-home.png" alt="主页" width="900">
+</p>
+
+---
 
 ## 功能
 
 * **站点看板** —— 任一车站任一日期当天的全部计划班次，叠加实时修正（改点显示实时时刻与
   延迟，改站台会标出）。可按交通方式筛选、隐藏已开出、翻页查看。
-  ![站点看板](preview-zh-station.png)
+
+  <img src="preview-zh-station.png" alt="站点看板" width="820">
+
 * **线路时刻表** —— 选线路、方向与时段；打开即定位到"现在"，每页 20/40/80/全部，
   再长的线路也一屏放得下。
-  ![线路时刻表](preview-zh-line.png)
+
+  <img src="preview-zh-line.png" alt="线路时刻表" width="820">
+
 * **主页概览** —— 每小时班次（按交通方式堆叠）、各方式总量、常用线路（首末班与高峰
   班次）、常用车站（接下来 3 班车）。
 * **服务通告** —— 中断、施工、新闻，可按方式/线路/关键词筛选。
-  ![服务通告](preview-zh-alerts.png)
+
+  <img src="preview-zh-alerts.png" alt="服务通告" width="820">
+
 * **班次详情** —— 点任意一班可看完整逐站时刻。
 * **中英双语** —— 按浏览器语言自动选择，右上角可切换并记住。
 * **键盘优先** —— `/` 搜索，`↑ ↓` 选择，`Enter` 打开，`Esc` 关闭。
