@@ -16,7 +16,7 @@ def main() -> None:
     ap.add_argument("--reload", action="store_true")
     args = ap.parse_args()
     url = f"http://{args.host}:{args.port}/"
-    print(f"\n  TripLens  ·  悉尼交通查询\n  {url}\n")
+    print(f"\n  TripLens  ·  Sydney transit\n  {url}\n")
     if args.open:
         webbrowser.open(url)
     uvicorn.run("app.main:app", host=args.host, port=args.port,
