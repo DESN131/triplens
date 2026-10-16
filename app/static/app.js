@@ -6,6 +6,22 @@ const API = "/api";
 const NET = { CR: { color: "#F6891F" }, SM: { color: "#12A5B0" },
               LR: { color: "#EB3843" }, SF: { color: "#5BB84D" } };
 const NET_ORDER = ["CR", "SM", "LR", "SF"];
+/* Line colours follow the published Sydney network palette (T1-T9, M1 are the
+   ones people recognise); anything not listed falls back to its mode colour,
+   so tuning a single value here re-skins the whole UI. */
+const LINE_COLOUR = {
+  T1: "#F99D1C", T2: "#6CBE45", T3: "#9A5B3C", T4: "#005AA3", T5: "#9B4F96",
+  T6: "#E8B10E", T7: "#7C878E", T8: "#00954C", T9: "#D11F2F",
+  M1: "#01AFB8",
+  BMT: "#F2C200", CCN: "#00A1DE", SCO: "#005AA3", SHL: "#78BE20", HUN: "#B5A642",
+  L1: "#EE343F", L2: "#EE343F", L3: "#EE343F", L4: "#EE343F",
+  NLR: "#EE343F", LX: "#EE343F",
+  F1: "#5BB84D", F2: "#5BB84D", F3: "#5BB84D", F4: "#5BB84D", F5: "#5BB84D",
+  F6: "#5BB84D", F7: "#5BB84D", F8: "#5BB84D", F9: "#5BB84D", F10: "#5BB84D",
+  CCLC: "#5BB84D", CRF: "#5BB84D", MFF: "#5BB84D",
+};
+const lineColour = (code, network) =>
+  LINE_COLOUR[String(code || "").toUpperCase()] || NET[network]?.color || "#888";
 const ROUTE_ORDER = ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9",
                      "M1", "BMT", "CCN", "SCO", "SHL", "HUN",
                      "L1", "L2", "L3", "L4", "NLR", "LX",
@@ -186,6 +202,11 @@ window.addEventListener("hashchange", () => {
 });
 
 async function boot() {
+  const forced = new URLSearchParams(location.search).get("lang");
+  if (forced === "en" || forced === "zh") {
+    LANG = forced;
+    localStorage.setItem("tl.lang", LANG);
+  }
   setClock();
   setInterval(setClock, 1000);
   applyLang(false);
@@ -372,10 +393,9 @@ async function loadRoutes(quiet = false) {
       .slice(0, 18);
     box.innerHTML = list.map((l) => {
       const trips = l.trips[0] + l.trips[1];
-      const colour = NET[l.network]?.color || "#888";
+      const colour = lineColour(l.code, l.network);
       return `<a class="lcard" href="#/line/${encodeURIComponent(l.id)}"
           style="--accent:${colour}" title="${esc(l.name)}">
-        <span class="ico">${modeIcon(l.network)}</span>
         <span class="body">
           <span class="tit"><b class="badge" style="background:${colour}">${esc(l.code)}</b>
             <span class="nm">${esc(shortLine(l.name))}</span></span>
@@ -383,7 +403,7 @@ async function loadRoutes(quiet = false) {
             ${esc(t("peak_n", l.peak))}</span>
         </span></a>`;
     }).join("") + `<a class="lcard more-card" href="#/line">
-        <span class="ico">＋</span><span class="body"><span class="tit"><b>${esc(t("all_lines"))}</b></span>
+        <span class="body"><span class="tit"><b>${esc(t("all_lines"))}</b></span>
         <span class="meta">${esc(t("all_lines_hint"))}</span></span></a>`;
   } catch (e) {
     box.innerHTML = `<span class="sub">${esc(t("err", e.message))}</span>`;
@@ -404,7 +424,7 @@ async function loadQuick() {
           `<span class="badge" style="background:${codeColour(c)}">${esc(c)}</span>`).join("")}</span>
         <span class="next">${(s.next || []).map((n) =>
           `<span class="nrow"><b>${esc(n.clock)}</b>
-             <span class="badge" style="background:${NET[n.network]?.color || "#888"}">${esc(n.line)}</span>
+             <span class="badge" style="background:${lineColour(n.line, n.network)}">${esc(n.line)}</span>
              <span class="dest">${esc(n.destination)}</span>
              <span class="pf">${n.platform ? "P" + esc(n.platform) : ""}</span></span>`).join("")
           || `<span class="muted">${esc(t("no_more_today"))}</span>`}</span></a>`).join("");
@@ -417,10 +437,7 @@ async function loadQuick() {
   } catch { /* keep the page usable */ }
 }
 const modeIcon = (k) => ({ CR: "🚆", SM: "🚇", LR: "🚊", SF: "⛴" }[k] || "🚏");
-const codeColour = (code) => {
-  const fam = { T: "CR", M: "SM", L: "LR", F: "SF" }[String(code)[0]] || "CR";
-  return NET[fam]?.color || "#888";
-};
+const codeColour = (code) => lineColour(code, null);
 
 /* ── station board ─────────────────────────────────────── */
 function renderStation() {
@@ -464,7 +481,7 @@ async function loadStationMeta(name) {
       .map((l) => {
         const short = shortLine(l.name);
         return `<a class="chip" href="#/line/${encodeURIComponent(l.id)}" title="${esc(l.name)}">
-          <span class="sw" style="background:${NET[l.network]?.color || "#888"}"></span>${esc(l.code)}
+          <span class="sw" style="background:${lineColour(l.code, l.network)}"></span>${esc(l.code)}
           ${short && short !== l.code ? `<span class="n">${esc(short)}</span>` : ""}</a>`;
       }).join("");
   } catch { /* leave the header minimal */ }
@@ -540,7 +557,7 @@ function rowHTML(r, isNext, now, today) {
   const eff = r.live ?? r.time;
   const delay = r.delay || 0;
   const past = today && eff < now - 1;
-  const colour = NET[r.network]?.color || "#888";
+  const colour = lineColour(r.line, r.network);
   const tags = [];
   if (r.realtime) {
     tags.push(`<span class="tag live">${esc(t("live_fix"))}</span>`);
@@ -733,7 +750,7 @@ async function openTrip(dataset) {
   $("scrim").classList.add("open");
   try {
     const d = await json(`${API}/trip?` + qs({ line, depart, trip, day, live: 1 }));
-    const colour = NET[d.line.network]?.color || "#888";
+    const colour = lineColour(d.line.code, d.line.network);
     const now = svcMinutes();
     const today = d.day === sydneyDate();
     const liveStops = d.stops.filter((s) => s.live != null).length;

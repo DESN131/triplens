@@ -223,7 +223,8 @@ footer{max-width:var(--maxw);margin:0 auto;padding:18px;color:var(--faint0);font
 .lcard .ico,.scard .ico{font-size:19px;line-height:1}
 .lcard .body{min-width:0;display:flex;flex-direction:column;gap:2px}
 .lcard .tit{display:flex;align-items:center;gap:7px;min-width:0}
-.lcard .tit .nm{font-weight:600;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lcard .tit .nm{font-weight:650;font-size:16.5px;letter-spacing:.1px;color:var(--fg);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .lcard .meta,.scard .meta{font-size:11.5px;color:var(--faint0);font-variant-numeric:tabular-nums}
 .more-card{border-left-color:var(--line2);justify-content:center}
 .scard{display:flex;flex-direction:column;gap:7px;padding:12px 13px;border:1px solid var(--line);
@@ -253,4 +254,28 @@ footer{max-width:var(--maxw);margin:0 auto;padding:18px;color:var(--faint0);font
   table.board td{border:0;padding:2px 0}
   td.t{font-size:17px}
   td.pf::before{content:"站台 "}
+}
+
+/* phones */
+@media (max-width:560px){
+  .wrap,.top,main,footer,.tabs{padding-left:10px;padding-right:10px}
+  h2{font-size:18px}
+  .panel{padding:11px 11px}
+  .grid{grid-template-columns:1fr;gap:8px}
+  .lcard,.scard{padding:10px 11px}
+  .lcard .tit .nm{font-size:16px}
+  .scard .next{margin-top:2px}
+  .status .cd{display:none}
+  .tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tabs a{white-space:nowrap}
+  .bars{height:88px}
+  .bar-labels{font-size:9.5px}
+  .pager{gap:6px}
+  .pager button{padding:6px 9px}
+  .pager .f{margin-left:auto}
+  .drawer{width:100vw}
+  .drawer-body{padding:10px 12px 24px}
+  table.board td{padding:6px 8px}
+  td.t{font-size:16px}
+  .legend{font-size:11px}
 }
